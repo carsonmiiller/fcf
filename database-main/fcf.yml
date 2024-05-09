@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  db2:
+    image: mysql/mysql-server:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: L238fcf
+      MYSQL_DATABASE: FiveCourseFeeder
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+      - L2_38:/var/lib/mysql
+    ports:
+      - "53306:3306"
+  web:
+    depends_on:
+      - db2
+    image: tomcat
+    environment:
+      MYSQL_ROOT_PASSWORD: L238fcf
+      MYSQL_DATABASE: FiveCourseFeeder
+      MYSQL_USER: testuser
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - "8080:8080"
+volumes:
+  L2_38:
